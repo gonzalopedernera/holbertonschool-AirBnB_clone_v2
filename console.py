@@ -133,17 +133,17 @@ class HBNBCommand(cmd.Cmd):
         obj = HBNBCommand.classes[arg[0]]()
 
         for i in range(1, len(arg)):
-            arg[i] = arg[i].replace('_', ' ')
             params = arg[i].split("=")
-            # if "id" in params[0]:
-            #     params[1] = params[1].strip('\"')
-            # elif params[1].isdigit() and "." not in params[1]:
-            #     params[1] = int(params[1])
-            # elif isFloat(params[1]):
-            #     params[1] = float(params[1])
-            # else:
-            #     params[1] = params[1].strip('\"')
-            params[1] = eval(params[1])
+            if "id" in params[0]:
+                params[1] = params[1].replace('_', ' ')
+                params[1] = params[1].strip('\"')
+            elif params[1].isdigit() and "." not in params[1]:
+                params[1] = int(params[1])
+            elif isFloat(params[1]):
+                params[1] = float(params[1])
+            else:
+                params[1] = params[1].replace('_', ' ')
+                params[1] = params[1].strip('\"')
             setattr(obj, params[0], params[1])
 
         storage.save()
