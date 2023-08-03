@@ -5,6 +5,7 @@ from models.city import City
 from models.state import State
 import os
 
+
 class DBStorage():
     __engine = None
     __session = None
@@ -37,18 +38,18 @@ class DBStorage():
             for i in classes:
                 for instance in self.__session(i):
                     objects[i + '.' + instance.id] = instance
-            return objects 
-    
+            return objects
+
     def new(self, obj):
         self.__session.add(obj)
 
     def save(self):
         self.__session.commit()
-    
+
     def delete(self, obj=None):
         if obj is not None:
             self.__session.delete(obj)
-    
+
     def reload(self):
         from models.base_model import Base
         from models.amenity import Amenity
@@ -57,6 +58,7 @@ class DBStorage():
         from models.user import User
 
         Base.metadata.create_all(self.__engine)
-        session_creation = sessionmaker(bind=self.__engine, expire_on_commit=False)
+        session_creation = sessionmaker(
+            bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(session_creation)
         self.__session = Session()
