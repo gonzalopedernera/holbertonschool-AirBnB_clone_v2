@@ -19,8 +19,8 @@ class State(BaseModel, Base):
             from models import storage
             cities = []
             for key, value in storage.__objects.items():
-                l = key.split('.')
-                if l[0] == 'City':
+                splited_key = key.split('.')
+                if splited_key[0] == 'City':
                     cities.append(value)
             filtered_cities = list(
                 filter(lambda x: x.state_id == self.id), cities)
