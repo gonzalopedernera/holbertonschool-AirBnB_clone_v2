@@ -10,7 +10,7 @@ from models.user import User
 class Place(BaseModel, Base):
     """ A place to stay """
     __tablename__ = 'places'
-    city_id = Column(String(60), nullable=False)
+    city_id = Column(String(60), ForeignKey('cities.id'), nullable=False)
     user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
     name = Column(String(128), nullable=False)
     description = Column(String(1024), nullable=False)
@@ -23,7 +23,6 @@ class Place(BaseModel, Base):
     amenity_ids = []
 
     if os.getenv('HBNB_TYPE_STORAGE') == 'db':
-        from models.engine.db_storage import DBStorage
         reviews = relationship("Review", backref="place",
                                cascade="all, delete, delete-orphan")
     else:
