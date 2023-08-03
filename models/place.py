@@ -59,9 +59,9 @@ class Place(BaseModel, Base):
                 splited_key = key.split('.')
                 if splited_key[0] == 'Amenity':
                     amenities.append(value)
-            self.amenity_ids = list(
+            filtered_amenities = list(
                 filter(lambda x: x.place_id == self.id), amenities)
-            return self.amenity_ids
+            return filtered_amenities
 
         @amenities.setter
         def amenities(self, obj=None):
