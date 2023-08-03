@@ -26,7 +26,7 @@ class FileStorage:
     def delete(self, obj=None):
         """Deletes an object from the dictionary"""
         if obj:
-            key = obj.__name__ + "." + obj.id
+            key = obj.__class__.__name__ + "." + obj.id
             del FileStorage.__objects[key]
             self.save()
 
