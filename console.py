@@ -146,7 +146,7 @@ class HBNBCommand(cmd.Cmd):
                 params[1] = params[1].strip('\"')
             setattr(obj, params[0], params[1])
 
-        storage.save()
+        obj.save()
         print(obj.id)
         storage.save()
 
