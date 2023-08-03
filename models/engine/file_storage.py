@@ -13,7 +13,7 @@ class FileStorage:
         if cls:
             new_dict = {}
             for k, v in FileStorage.__objects.items():
-                if k.split('.')[0] == cls:
+                if k.split('.')[0] == cls.__name__:
                     new_dict[k] = v
             return new_dict
         else:
@@ -26,7 +26,7 @@ class FileStorage:
     def delete(self, obj=None):
         """Deletes an object from the dictionary"""
         if obj:
-            key = obj.__name__ + "." + obj.id
+            key = obj.__class__.__name__ + "." + obj.id
             del FileStorage.__objects[key]
             self.save()
 
