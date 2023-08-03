@@ -64,6 +64,7 @@ class Place(BaseModel, Base):
             return self.amenity_ids
 
         @amenities.setter
-        def amenities(self, obj):
-            if obj.__class__.__name__ == 'Amenity':
-                self.amenity_ids.append(obj.id)
+        def amenities(self, obj=None):
+            if obj:
+                if obj.__class__.__name__ == 'Amenity':
+                    self.amenity_ids.append(obj.id)
