@@ -25,15 +25,37 @@ class Place(BaseModel, Base):
     if os.getenv('HBNB_TYPE_STORAGE') == 'db':
         reviews = relationship("Review", backref="place",
                                cascade="all, delete, delete-orphan")
+        amenities = relationship("Amenity", secondary=place_amenities,
+        back_populates='places',
+        viewonly=False)
     else:
         @property
         def reviews(self):
             from models import storage
             reviews = []
             for key, value in storage.__objects.items():
-                l = key.split('.')
-                if l[0] == 'Review':
+                splited_key = key.split('.')
+                if splited_key[0] == 'Review':
                     reviews.append(value)
             filtered_reviews = list(
                 filter(lambda x: x.place_id == self.id), reviews)
             return filtered_reviews
+        
+        @property
+        def amenities(self):
+            from models import storage
+            amenities = []
+            for key, value in storage.__objects.items():
+                splited_key = key.split('.')
+                if splited_key[0] == 'Amenity':
+                    amenities.append(value)
+            self.amenity_ids = list(
+                filter(lambda x: x.place_id == self.id), amenities)
+            return self.amenity_ids
+        
+        @amenities.setter
+        def amenities(self, obj):
+            if obj.__class__.__name__ == 'Amenity':
+                self.amenity_ids.append(obj.id)
+
+
