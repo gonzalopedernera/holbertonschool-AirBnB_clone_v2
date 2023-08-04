@@ -24,4 +24,4 @@ class test_state(test_basemodel):
         storage.save()
         relational = self.cursor.execute(
             "SELECT * FROM states WHERE id = %s", (new.id))
-        self.assertEqual(relational == new)
+        self.assertEqual(relational, new)
