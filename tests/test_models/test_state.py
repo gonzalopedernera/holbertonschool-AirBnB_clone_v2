@@ -17,7 +17,7 @@ class test_state(test_basemodel):
                              password="hbnb_dev_pwd")
         self.cursor = db.cursor()
 
-    def test_name3(self):
+    def test_name(self):
         """ check for state creation """
         new = State(name="Alabama")
         new.save()
