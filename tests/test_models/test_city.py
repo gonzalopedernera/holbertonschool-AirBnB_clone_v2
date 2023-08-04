@@ -1,33 +1,24 @@
 #!/usr/bin/python3
-"""
-Unittest for City class
-"""
-import unittest
+""" """
+from tests.test_models.test_base_model import test_basemodel
 from models.city import City
-import os
 
 
-class TestCity(unittest.TestCase):
-    """ Tests for City Class"""
+class test_City(test_basemodel):
+    """ """
 
-    def tearDown(self) -> None:
-        """ teardown method """
-        if os.path.exists("file.json"):
-            os.remove("file.json")
+    def __init__(self, *args, **kwargs):
+        """ """
+        super().__init__(*args, **kwargs)
+        self.name = "City"
+        self.value = City
 
-    def test_create_class(self):
-        """ Tests if the class was created correctly """
-        c1 = City()
-        self.assertIsInstance(c1, City)
-        self.assertTrue(hasattr(c1, "state_id"))
-        self.assertTrue(hasattr(c1, "name"))
+    def test_state_id(self):
+        """ """
+        new = self.value()
+        self.assertEqual(type(new.state_id), str)
 
-    def test_empty_attributes(self):
-        """ Tests if the atribute its empty """
-        c1 = City()
-        self.assertAlmostEqual(c1.state_id, "")
-        self.assertAlmostEqual(c1.name, "")
-
-
-if __name__ == "__main__":
-    unittest.main()
+    def test_name(self):
+        """ """
+        new = self.value()
+        self.assertEqual(type(new.name), str)
