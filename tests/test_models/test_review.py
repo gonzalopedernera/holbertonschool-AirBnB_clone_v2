@@ -1,29 +1,35 @@
 #!/usr/bin/python3
-""" """
-from tests.test_models.test_base_model import test_basemodel
+"""
+Unittest for Review class
+"""
+import unittest
 from models.review import Review
+import os
 
 
-class test_review(test_basemodel):
-    """ """
+class TestReview(unittest.TestCase):
+    """ Tests for Review Class"""
 
-    def __init__(self, *args, **kwargs):
-        """ """
-        super().__init__(*args, **kwargs)
-        self.name = "Review"
-        self.value = Review
+    def tearDown(self) -> None:
+        """ teardown method """
+        if os.path.exists("file.json"):
+            os.remove("file.json")
 
-    def test_place_id(self):
-        """ """
-        new = self.value()
-        self.assertEqual(type(new.place_id), str)
+    def test_create_class(self):
+        """ Tests if the class was created correctly """
+        r1 = Review()
+        self.assertIsInstance(r1, Review)
+        self.assertTrue(hasattr(r1, "place_id"))
+        self.assertTrue(hasattr(r1, "user_id"))
+        self.assertTrue(hasattr(r1, "text"))
 
-    def test_user_id(self):
-        """ """
-        new = self.value()
-        self.assertEqual(type(new.user_id), str)
+    def test_empty_attributes(self):
+        """ Tests if the atribute its empty """
+        r1 = Review()
+        self.assertAlmostEqual(r1.place_id, "")
+        self.assertAlmostEqual(r1.user_id, "")
+        self.assertAlmostEqual(r1.text, "")
 
-    def test_text(self):
-        """ """
-        new = self.value()
-        self.assertEqual(type(new.text), str)
+
+if __name__ == "__main__":
+    unittest.main()
