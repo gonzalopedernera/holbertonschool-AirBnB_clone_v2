@@ -37,7 +37,8 @@ def python_is_fun(text="is cool"):
 @app.route("/number/<int:n>", strict_slashes=False)
 def number(n):
     """Function to display on web app number/<n> only if n is an int"""
-    return f"{n} is a number"
+    if n:
+        return f"{n} is a number"
 
 
 if __name__ == '__main__':
