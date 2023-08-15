@@ -8,13 +8,13 @@ app = Flask(__name__)
 @app.route("/", strict_slashes=False)
 def hello_hbnb():
     """Function for display on web start"""
-    return "<p>Hello HBNB!</p>"
+    return "Hello HBNB!"
 
 
-@app.route("hbnb/", strict_slashes=False)
-def hello_hbnb():
+@app.route("/hbnb", strict_slashes=False)
+def hbnb():
     """Function for display on web hbnb route"""
-    return "<p>HBNB</p>"
+    return "HBNB"
 
 
 if __name__ == '__main__':
