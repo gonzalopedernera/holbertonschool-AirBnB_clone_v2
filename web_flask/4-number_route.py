@@ -24,5 +24,21 @@ def c_is_fun(text):
     return f"C {formated_text}"
 
 
+@app.route("pyhton/<text>", strict_slashes=False)
+def python_is_fun(text="is cool"):
+    """Function for display on web python/<text> route"""
+    if text:
+        formated_text = text.replace("_", " ")
+        return f"Python {formated_text}"
+    else:
+        return f"Pyhton {text}"
+
+
+@app.route("/number/<int:n>", strict_slashes=False)
+def number(n):
+    """Function to display on web app number/<n> only if n is an int"""
+    return f"{n} is a number"
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
