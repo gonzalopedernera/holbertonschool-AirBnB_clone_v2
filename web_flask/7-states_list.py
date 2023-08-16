@@ -15,7 +15,7 @@ def remove_session():
 def states_list():
     """Function to display on web app /states_list route"""
     return render_template(
-        '7-states_list.html', states=storage.all("State").values()
+        '7-states_list.html', states=storage.all(State).values()
         )
 
 
