@@ -23,15 +23,13 @@ def c_is_fun(text):
     formated_text = text.replace("_", " ")
     return f"C {formated_text}"
 
-
-@app.route("pyhton/<text>", strict_slashes=False)
-def python_is_fun(text="is cool"):
+@app.route("/python/", defaults={'text', 'is cool'} )
+@app.route("/pyhton/<text>", strict_slashes=False)
+def python_is_fun(text):
     """Function for display on web python/<text> route"""
     if text:
         formated_text = text.replace("_", " ")
         return f"Python {formated_text}"
-    else:
-        return f"Pyhton {text}"
 
 
 if __name__ == '__main__':
