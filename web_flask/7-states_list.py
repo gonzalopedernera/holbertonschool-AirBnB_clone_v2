@@ -8,16 +8,15 @@ app = Flask(__name__)
 
 
 @app.teardown_appcontext
-def remove_session():
+def remove_session(e):
     storage.close()
 
 
 @app.route('/states_list', strict_slashes=False)
 def states_list():
     """Function to display on web app /states_list route"""
-    return render_template(
-        '7-states_list.html', states=storage.all(State)
-        )
+    states = storage.all(State)
+    return render_template('7-states_list.html', states=states)
 
 
 if __name__ == '__main__':
