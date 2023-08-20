@@ -39,7 +39,7 @@ class DBStorage():
 
         objects = {}
         if cls != '':
-            for instance in self.__session.query(cls):
+            for instance in self.__session.query(cls).all():
                 instance_key = instance.__class__.__name__ + '.' + instance.id
                 objects[instance_key] = instance
             return objects
