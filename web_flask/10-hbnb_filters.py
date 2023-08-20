@@ -14,6 +14,7 @@ def remove_session(e):
 
 @app.route('/hbnb_filters', strict_slashes=False)
 def hbnb_filters():
+    """Function to display on web /hbnb_filters route"""
     states = storage.all(State).values()
     amenities = storage.all(Amenity).values()
     return render_template(
