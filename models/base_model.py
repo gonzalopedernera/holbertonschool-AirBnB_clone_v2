@@ -4,7 +4,6 @@ import uuid
 from datetime import datetime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, String, Integer, Float, DateTime
-from os import getenv
 
 Base = declarative_base()
 
@@ -23,8 +22,6 @@ class BaseModel:
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
         else:
-            if getenv('HBNB_TYPE_STORAGE') != 'db':
-                kwargs.pop('__class__', None)
             if kwargs.get('created_at'):
                 kwargs["created_at"] = datetime.strptime(
                     kwargs["created_at"], "%Y-%m-%dT%H:%M:%S.%f")
