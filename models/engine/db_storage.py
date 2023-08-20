@@ -28,16 +28,29 @@ class DBStorage():
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
+        from models.amenity import Amenity
+        from models.place import Place
+        from models.review import Review
+        from models.user import User
+        from models.base_model import BaseModel
+        classes = {"User": User, "BaseModel": BaseModel, "Place": Place,
+                   "State": State, "City": City, "Amenity": Amenity,
+                   "Review": Review}
+
         objects = {}
-        if cls is not None:
+        if cls != '':
             for instance in self.__session.query(cls):
-                objects[cls.__name__ + '.' + instance.id] = instance
+                instance_key = instance.__class__.__name__ + '.' + instance.id
+                objects[instance_key] = instance
             return objects
         else:
-            classes = ["Amenity", "City", "Place", "Review", "State", "User"]
-            for i in classes:
-                for instance in self.__session(i):
-                    objects[i + '.' + instance.id] = instance
+            for key, value in classes.items():
+                if key != "BaseModel":
+                    all_objs = self.__session.query(value).all()
+                    if len(all_objs) > 0:
+                        for ins in all_objs:
+                            k = ins.__class__.__name__ + '.' + ins.id
+                            objects[k] = ins
             return objects
 
     def new(self, obj):
