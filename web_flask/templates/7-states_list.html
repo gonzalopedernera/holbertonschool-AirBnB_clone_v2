@@ -5,9 +5,9 @@
     </HEAD>
     <BODY>
         <H1>States</H1>
-        <UL id="states">
-            {% for key, value in states | sort(attribute="name") %}
-            <LI>{{ value.id }}: <B>{{ value.name }}</B></LI>
+        <UL>
+            {% for state in states | sort(attribute="name") %}
+				<LI>{{ state.id }}: <B>{{ state.name }}</B></LI>
             {% endfor %}
         </UL>
     </BODY>
